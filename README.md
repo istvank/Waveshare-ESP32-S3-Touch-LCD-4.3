@@ -4,6 +4,14 @@ This is a first test with getting a Waveshare ESP32-S3-LCD-4.3 Touch running wit
 
 It is a very simple two-screen UI with buttons going back and forth.
 
+## Get Started
+
+1. Open the project in PlatformIO
+2. Connect your board to USB
+3. Make sure to press and hold the Boot button on your board, then press the Reset button, and release the Boot button
+4. Click Upload
+5. Enjoy clicking back and forth on your touch panel :)
+
 ## Libraries
 
 The libraries are the ones provided on the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3): [S3-4.3-libraries.zip](https://files.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3/S3-4.3-libraries.zip), except for lvgl, which is added as library dependency in `platformio.ini`.
