@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ESP32&lowbar;IO&lowbar;Expander</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <p><a href="https://github.com/esp-arduino-libs/ESP32_IO_Expander/actions/workflows/arduino_lint.yml"><img src="https://github.com/esp-arduino-libs/ESP32_IO_Expander/actions/workflows/arduino_lint.yml/badge.svg" alt="Arduino Lint"></a> <a href="https://github.com/esp-arduino-libs/ESP32_IO_Expander/actions/workflows/pre-commit.yml"><img src="https://github.com/esp-arduino-libs/ESP32_IO_Expander/actions/workflows/pre-commit.yml/badge.svg" alt="pre-commit"></a> <a href="https://github.com/esp-arduino-libs/ESP32_IO_Expander/actions/workflows/build_test.yml"><img src="https://github.com/esp-arduino-libs/ESP32_IO_Expander/actions/workflows/build_test.yml/badge.svg" alt="Build Test Apps"></a></p>
+<h1 id="esp32_io_expander">ESP32_IO_Expander</h1>
+<p>ESP32_IO_Expander is an Arduino library designed for driving <a href="#supported-drivers">IO expander chips</a> using ESP32 SoCs.</p>
+<p>ESP32_IO_Expander encapsulates various components from the <a href="https://components.espressif.com/">Espressif Components Registry</a>. It is developed based on <a href="https://github.com/espressif/arduino-esp32">arduino-esp32</a> and can be easily downloaded and integrated into the Arduino IDE.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Supports various IO expander chips.</li>
+<li>Supports controlling individual IO pin (using pinMode(), digitalRead(), and digitalWrite() functions).</li>
+<li>Supports controlling multiple IO pins simultaneously.</li>
+</ul>
+<h2 id="supported-drivers">Supported Drivers</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Driver</strong></th>
+<th><strong>Version</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://components.espressif.com/components/espressif/esp_io_expander">esp_io_expander</a></td>
+<td>1.0.1</td>
+</tr>
+<tr>
+<td><a href="https://components.espressif.com/components/espressif/esp_io_expander_tca9554">TCA95xx (8bit)</a></td>
+<td>1.0.1</td>
+</tr>
+<tr>
+<td><a href="https://components.espressif.com/components/espressif/esp_io_expander_tca95xx_16bit">TCA95xx (16bit)</a></td>
+<td>1.0.0</td>
+</tr>
+<tr>
+<td><a href="https://components.espressif.com/components/espressif/esp_io_expander_ht8574">HT8574</a></td>
+<td>1.0.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dependencies-version">Dependencies Version</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Version</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32_IO_Expander</td>
+<td>v0.x.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/espressif/arduino-esp32">arduino-esp32</a></td>
+<td>&gt;= v2.0.9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-use">How to Use</h2>
+<p>For information on how to use the library in the Arduino IDE, please refer to the documentation for <a href="https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries">Arduino IDE v1.x.x</a> or <a href="https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-installing-a-library">Arduino IDE v2.x.x</a>.</p>
+<h3 id="examples">Examples</h3>
+<ul>
+<li><a href="examples/TestFunctions">Test Functions</a>: Demonstrates how to use ESP32_IO_Expander and test all functions.</li>
+</ul>
+<h3 id="detailed-usage">Detailed Usage</h3>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ESP_IOExpander_Library.h&gt;</span></span>
+
+<span class="hljs-comment">// Create an ESP_IOExpander object according to the chip type</span>
+ESP_IOExpander *expander = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ESP_IOExpander_TCA95xx_8bit</span>(EXAMPLE_I2C_NUM_0, ESP_IO_EXPANDER_I2C_TCA9554_ADDRESS_000,
+                                                           EXAMPLE_I2C_SCL_PIN, EXAMPLE_I2C_SDA_PIN);
+
+<span class="hljs-comment">// Control a single pin (0-31)</span>
+expander-&gt;<span class="hljs-built_in">pinMode</span>(<span class="hljs-number">0</span>, OUTPUT);
+expander-&gt;<span class="hljs-built_in">digitalWrite</span>(<span class="hljs-number">0</span>, HIGH);
+expander-&gt;<span class="hljs-built_in">digitalWrite</span>(<span class="hljs-number">0</span>, LOW);
+expander-&gt;<span class="hljs-built_in">pinMode</span>(<span class="hljs-number">0</span>, INPUT);
+<span class="hljs-type">int</span> level = expander-&gt;<span class="hljs-built_in">digitalRead</span>(<span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// Control multiple pins (IO_EXPANDER_PIN_NUM_0 - IO_EXPANDER_PIN_NUM_31)</span>
+expander-&gt;<span class="hljs-built_in">multiPinMode</span>(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, OUTPUT);
+expander-&gt;<span class="hljs-built_in">multiDigitalWrite</span>(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, HIGH);
+expander-&gt;<span class="hljs-built_in">multiDigitalWrite</span>(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, LOW);
+expander-&gt;<span class="hljs-built_in">multiPinMode</span>(IO_EXPANDER_PIN_NUM_0 | IO_EXPANDER_PIN_NUM_1, INPUT);
+<span class="hljs-type">uint32_t</span> level = expander-&gt;<span class="hljs-built_in">multiDigitalRead</span>(IO_EXPANDER_PIN_NUM_2 | IO_EXPANDER_PIN_NUM_3);
+
+<span class="hljs-comment">// Release the ESP_IOExpander object</span>
+<span class="hljs-keyword">delete</span> expander;
+</code></pre>
+
+        
+        
+    </body>
+    </html>
